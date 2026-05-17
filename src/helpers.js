@@ -161,7 +161,7 @@ function mergeHashes(source, target, options = {}, resetValues = {}) {
       } else {
         if (
           (options.resetAndFlag &&
-            !isPlural(key) &&
+            !isPlural(key, pluralSeparator) &&
             typeof source[key] === 'string' &&
             source[key] !== target[key]) ||
           resetValues[key]
@@ -242,8 +242,8 @@ function transferValues(source, target) {
 
 const pluralSuffixes = ['zero', 'one', 'two', 'few', 'many', 'other']
 
-function isPlural(key) {
-  return pluralSuffixes.some((suffix) => key.endsWith(suffix))
+function isPlural(key, pluralSeparator) {
+  return pluralSuffixes.some((suffix) => key.endsWith(pluralSeparator + suffix))
 }
 
 function hasRelatedPluralKey(rawKey, source) {
